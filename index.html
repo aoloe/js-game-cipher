@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>cipher</title>
+    <link rel="stylesheet" href="css/cipher.css">
+    <style>
+    </style>
+  </head>
+  <body>
+    <div class="" id="app">
+      <div v-if="sentence !== null" class="sentence">
+        <p><a href="#" v-on:click="select(null)">«</a></p>
+        <editor v-if="editing === true" :languages="languages" v-on:create="create" v-on:update="update">
+        </editor>
+        <div v-for="(character, i) in sentence.characters" class="character">
+          <template v-if="character.i !== 0">
+          <character ref="characters" :character="character" :pos="i" :transformations="sentence.transformations" v-on:next_focus="next_focus" v-on:prev_focus="prev_focus" v-on:add_character="add_character"></character>
+          <div class="cipher">{{character.i}}</div>
+          </template>
+          <template v-else>
+          <div v-if="character.c === ' '" class="space"> </div>
+          <div v-else class="hint">{{character.c}}</div>
+          </template>
+        </div>
+      <p v-if="description !== null && description !== ''"><a href="#" v-on:click="toggle_description()">+ Description</a></p>
+      <p v-if="editing === false">
+        <template v-if="share_key === null">
+        <input type="button" v-on:click="share" value="Share">
+        </template>
+        <template v-else>
+        <span class="share_key">{{share_key}}</span>
+        </template>
+      </p>
+      <p v-if="description_visible">{{description}}</p>
+      </div>
+      <template v-else>
+        <p>+ <a href="#" v-on:click="edit('')">Create a cipher</a></p>
+        <cipher-list :list="list" v-on:select="select" von:join_shared="join_shared">
+        </cipher-list>
+      </template>
+    </div>
+  <script src="https://js.pusher.com/5.1/pusher.min.js"></script>
+  <script src="js/axios.min.js"></script>
+  <script src="js/vue.js"></script>
+  <script src="js/components.js"></script>
+  <script src="js/app.js"></script>
+  <script>
+  </script>
+  </body>
+</html>
