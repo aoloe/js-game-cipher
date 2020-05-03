@@ -35,9 +35,10 @@
       <p v-if="description_visible">{{description}}</p>
       </div>
       <template v-else>
-        <p>+ <a href="#" v-on:click="edit('')">Create a cipher</a></p>
-        <cipher-list :list="list" v-on:select="select" v-on:join_shared="join_shared">
+        <cipher-list :list="list" v-on:select="select">
         </cipher-list>
+        <p>Join a shared Cipher: <input type="text" v-model="share_key"> <input type="button" v-on:click="join_shared" value="Join"></p>
+        <p>+ <a href="#" v-on:click="edit('')">Create a cipher</a></p>
       </template>
     </div>
   <script src="https://js.pusher.com/5.1/pusher.min.js"></script>
