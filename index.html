@@ -9,10 +9,10 @@
   </head>
   <body>
     <div class="" id="app">
+      <p><a href="#" v-on:click="select(null)">«</a></p>
+      <editor v-if="editing === true" :languages="languages" v-on:create="create" v-on:update="update">
+      </editor>
       <div v-if="sentence !== null" class="sentence">
-        <p><a href="#" v-on:click="select(null)">«</a></p>
-        <editor v-if="editing === true" :languages="languages" v-on:create="create" v-on:update="update">
-        </editor>
         <div v-for="(character, i) in sentence.characters" class="character">
           <template v-if="character.i !== 0">
           <character ref="characters" :character="character" :pos="i" :transformations="sentence.transformations" v-on:next_focus="next_focus" v-on:prev_focus="prev_focus" v-on:add_character="add_character"></character>
@@ -24,6 +24,7 @@
           </template>
         </div>
       <p v-if="description !== null && description !== ''"><a href="#" v-on:click="toggle_description()">+ Description</a></p>
+      <p v-if="description_visible">{{description}}</p>
       <p v-if="editing === false">
         <template v-if="share_key === null">
         <input type="button" v-on:click="share" value="Share">
@@ -32,7 +33,6 @@
         <span class="share_key">{{share_key}}</span>
         </template>
       </p>
-      <p v-if="description_visible">{{description}}</p>
       </div>
       <template v-else>
         <cipher-list :list="list" v-on:select="select">
