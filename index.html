@@ -23,16 +23,16 @@
           <div v-else class="hint">{{character.c}}</div>
           </template>
         </div>
-      <p v-if="description !== null && description !== ''"><a href="#" v-on:click="toggle_description()">+ Description</a></p>
-      <p v-if="description_visible">{{description}}</p>
-      <p v-if="editing === false">
-        <template v-if="share_key === null">
-        <input type="button" v-on:click="share" value="Share">
-        </template>
-        <template v-else>
-        <span class="share_key">{{share_key}}</span>
-        </template>
-      </p>
+        <p v-if="description !== null && description !== ''"><a href="#" v-on:click="toggle_description()">+ Description</a></p>
+        <p v-if="description_visible">{{description}}</p>
+        <p v-if="editing === false">
+          <template v-if="share_key === null">
+          <input type="button" v-on:click="share" value="Share">
+          </template>
+          <template v-else>
+          <span class="share_key">{{share_key}}</span>
+          </template>
+        </p>
       </div>
       <template v-else>
         <cipher-list :list="list" v-on:select="select">
