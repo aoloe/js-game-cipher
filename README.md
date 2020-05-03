@@ -11,6 +11,7 @@
 
 - show the language in the list
 - finish the modularization (compoments)
+- store the shared key in local storage
 - initial sync with others
 - editing existing sentences for the author itself.
 - import / export sentences.

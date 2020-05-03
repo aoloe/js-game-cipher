@@ -36,7 +36,7 @@
       </div>
       <template v-else>
         <p>+ <a href="#" v-on:click="edit('')">Create a cipher</a></p>
-        <cipher-list :list="list" v-on:select="select" von:join_shared="join_shared">
+        <cipher-list :list="list" v-on:select="select" v-on:join_shared="join_shared">
         </cipher-list>
       </template>
     </div>
