@@ -2,8 +2,8 @@
 
 ## Install
 
-- `git clone https://github.com/aoloe/js-game-cipher.git`
-- `composer install`
+- `git clone https://github.com/aoloe/js-game-cipher.git cipher`
+- `cd api && composer install`
 - `mkdir api/db`
 - create the `api/config.php` file (based on `api/config-demo.php`)
 

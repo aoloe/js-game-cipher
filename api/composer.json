@@ -12,7 +12,7 @@
       {
         "type": "vcs",
         "url":  "git@github.com:aoloe/php-tiny-rest.git"
-      },
+      }
     ],
     "require": {
         "pusher/pusher-php-server": "^4.1",
