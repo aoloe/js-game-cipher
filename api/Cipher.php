@@ -13,7 +13,8 @@ class Cipher
                 title TEXT,
                 language TEXT,
                 sentence TEXT,
-                description TEXT
+                description TEXT,
+                author TEXT
             );
         ");
         $this->db->query("CREATE TABLE IF NOT EXISTS share (
@@ -51,16 +52,17 @@ class Cipher
         return $row ? $row : [null, null, null, null];
     }
 
-    public function add($title, $language, $sentence, $description) {
+    public function add($title, $language, $sentence, $description, $author) {
         $sentence_hash = base64_encode(openssl_random_pseudo_bytes(16));
         $stmt = $this->db->prepare('INSERT INTO sentence
-            (sentence_hash, title, language, sentence, description)
-            VALUES (:sentence_hash, :title, :language, :sentence, :description)');
+            (sentence_hash, title, language, sentence, description, author)
+            VALUES (:sentence_hash, :title, :language, :sentence, :description, :author)');
         $stmt->bindValue(':sentence_hash', $sentence_hash, SQLITE3_TEXT);
         $stmt->bindValue(':title', $title, SQLITE3_TEXT);
         $stmt->bindValue(':language', $language, SQLITE3_TEXT);
         $stmt->bindValue(':sentence', $sentence, SQLITE3_TEXT);
         $stmt->bindValue(':description', $description, SQLITE3_TEXT);
+        $stmt->bindValue(':author', $author, SQLITE3_TEXT);
         $stmt->execute();
         return [$this->db->lastInsertRowid(), $sentence_hash];
     }

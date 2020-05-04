@@ -145,12 +145,11 @@ const app = new Vue({
           title: title,
           language: language,
           sentence: sentence,
-          description: description
+          description: description,
+          author: this.player_id
         })
         .then(response => {
             this.get_list();
-            this.player_id = response.data['player_id'];
-            this.game_id = response.data['game_id'];
             this.sentence = null;
             this.editing = false;
         });

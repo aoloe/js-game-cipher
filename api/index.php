@@ -48,7 +48,8 @@ $app->post('create', function() use($config, $request, $response) {
         $request->get('title'),
         $request->get('language'),
         $request->get('sentence'),
-        $request->get('description')
+        $request->get('description'),
+        $request->get('author')
     );
     $response->respond(['id' => $hash]);
 });
