@@ -11,5 +11,5 @@
 
 - store the shared key in local storage when joining a shared cipher
 - initial sync with others
-- editing existing sentences for the author itself.
+- editing (deleting) existing sentences by their author.
 - import / export sentences.
