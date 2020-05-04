@@ -9,9 +9,7 @@
 
 ## Todo
 
-- show the language in the list
-- finish the modularization (compoments)
-- store the shared key in local storage
+- store the shared key in local storage when joining a shared cipher
 - initial sync with others
 - editing existing sentences for the author itself.
 - import / export sentences.

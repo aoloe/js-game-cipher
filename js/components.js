@@ -2,7 +2,7 @@ Vue.component('cipher-list', {
   template: `<div>
     <h1>Ciphered citations</h1>
     <ul>
-      <li v-for="item in list"><a href="#" v-on:click="select(item.cipher_id)">{{item.title}}</a> ({{item.author}})</li>
+      <li v-for="item in list"><a href="#" v-on:click="select(item.cipher_id)">{{item.title}}</a> ({{item.language}})</li>
     </ul>
   </div>`,
   props: {
