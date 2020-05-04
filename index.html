@@ -9,7 +9,7 @@
   </head>
   <body>
     <div class="" id="app">
-      <p><a href="#" v-on:click="select(null)">«</a></p>
+      <p v-if="sentence !== null"><a href="#" v-on:click="select(null)">«</a></p>
       <editor v-if="editing === true" :languages="languages" v-on:create="create" v-on:update="update">
       </editor>
       <div v-if="sentence !== null" class="sentence">
