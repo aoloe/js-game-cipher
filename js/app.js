@@ -128,7 +128,6 @@ const app = new Vue({
     share_key: null,
   },
   mounted() {
-    // this.sentence = new Sentence("“ä” igäh isch _voll_ blöd, weisch?");
     if (localStorage.player_id) { 
       this.player_id = localStorage.player_id;
     } else {
@@ -140,15 +139,6 @@ const app = new Vue({
       this.select(localStorage.cipher_id);
     }
   },
-  watch: {
-    /*
-    new_sentence: {
-      handler(val) {
-        this.sentence = new Sentence(val);
-      }
-    }
-    */
-  },
   methods: {
     get_list: function() {
       axios
@@ -158,13 +148,11 @@ const app = new Vue({
           }
         })
         .then(response => {
-          console.log('response.data');
           this.list = response.data;
         });
     },
     // there seems to be no garantee that the items in $refs are in the correct order: we cannot pos as the index
     edit: function() {
-      console.log('hey');
       this.editing = true;
       this.sentence = '';
     },
@@ -252,44 +240,14 @@ const app = new Vue({
     toggle_description: function() {
       this.description_visible = !this.description_visible;
     },
-    prev_focus: function(pos) {
-      let c = null;
-      for (character of this.$refs.characters) {
-        if (character.pos < pos && (c === null || c.pos < pos)) {
-          c = character
-        }
-      }
-      if (c !== null) {
-        c.$el.focus();
-      }
-    },
-    next_focus: function(pos) {
-      let c = null;
-      for (character of this.$refs.characters) {
-        if (character.pos > pos && (c === null || c.pos < pos)) {
-          c = character
-        }
-      }
-      if (c !== null) {
-        c.$el.focus();
-      }
-    },
-    add_character(character, old_c) {
-      if (Character.is_uppercase(character.c)) {
-        character.c = character.c.toLowerCase();
-      }
-      if (Character.diacritics.has(character.c)) {
-        character.c = Character.diacritics.get(character.c)[1];
-      }
-      if (this.sentence.has(character)) {
-        character.c = old_c;
-      } else if (this.share_key !== null) {
+    add_character(c, i) {
+      if (this.share_key !== null) {
         axios
           .post(basedir+'/api/', {
             action: 'typing',
             share_key: this.share_key,
-            c: character.c,
-            i: character.i
+            c: c,
+            i: i
           })
           .then(response => {
             // TODO: if i'ts not ok, show a warning?

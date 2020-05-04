@@ -109,3 +109,63 @@ Vue.component('editor', {
     }
   }
 });
+
+Vue.component('ciphered-sentence', {
+  template: `<div>
+    <div v-for="(character, i) in sentence.characters" class="character">
+      <template v-if="character.i !== 0">
+      <character ref="characters" :character="character" :pos="i" :transformations="sentence.transformations" v-on:next_focus="next_focus" v-on:prev_focus="prev_focus" v-on:add_character="add_character"></character>
+      <div class="cipher">{{character.i}}</div>
+      </template>
+      <template v-else>
+      <div v-if="character.c === ' '" class="space"> </div>
+      <div v-else class="hint">{{character.c}}</div>
+      </template>
+    </div>
+  </div>`,
+  props: {
+    sentence: Object
+  },
+  data: function() {
+    return {
+    }
+  },
+  methods: {
+    prev_focus: function(pos) {
+      let c = null;
+      for (character of this.$refs.characters) {
+        if (character.pos < pos && (c === null || c.pos < pos)) {
+          c = character
+        }
+      }
+      if (c !== null) {
+        c.$el.focus();
+      }
+    },
+    next_focus: function(pos) {
+      let c = null;
+      for (character of this.$refs.characters) {
+        if (character.pos > pos && (c === null || c.pos < pos)) {
+          c = character
+        }
+      }
+      if (c !== null) {
+        c.$el.focus();
+      }
+    },
+    add_character(character, old_c) {
+      if (Character.is_uppercase(character.c)) {
+        character.c = character.c.toLowerCase();
+      }
+      if (Character.diacritics.has(character.c)) {
+        character.c = Character.diacritics.get(character.c)[1];
+      }
+
+      if (this.sentence.has(character)) {
+        character.c = old_c;
+      } else {
+        this.$emit('add_character', character.c, character.i);
+      }
+    }
+  }
+});
