@@ -29,7 +29,7 @@
       <template v-else>
         <cipher-list :list="list" v-on:select="select">
         </cipher-list>
-        <p>Join a shared Cipher: <input type="text" v-model="share_key"> <input type="button" v-on:click="join_shared" value="Join"></p>
+        <p>Join a shared Cipher: <input type="text" v-model="share_key" v-on:keyup.enter="join_shared"> <input type="button" value="Join" v-on:click="join_shared"></p>
         <p>+ <a href="#" v-on:click="edit('')">Create a cipher</a></p>
       </template>
     </div>
