@@ -133,6 +133,7 @@ const app = new Vue({
           key: this.share_key
         })
         .then(response => {
+          localStorage.setItem('share_key', this.share_key);
           this.select(response.data.id);
           this.activate_sharing();
         })
