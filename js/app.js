@@ -71,7 +71,7 @@ const app = new Vue({
     // there seems to be no garantee that the items in $refs are in the correct order: we cannot pos as the index
     edit: function() {
       this.editing = true;
-      this.sentence = '';
+      this.sentence = new Sentence('');
     },
     update: function(sentence) {
       this.sentence = new Sentence(sentence);

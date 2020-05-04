@@ -86,7 +86,7 @@ Vue.component('editor', {
     <input type="button" value="Add" :disabled="title === '' || language === null || sentence === ''" v-on:click="create" placeholder="Description">
   </div>`,
   props: {
-    languages: Array
+    languages: Object
   },
   data: function() {
     return {
