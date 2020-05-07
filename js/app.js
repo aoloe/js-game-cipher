@@ -61,7 +61,8 @@ const app = new Vue({
       axios
         .get(basedir+'/api/', {
           params: {
-            action: 'list'
+            action: 'list',
+            author: this.player_id
           }
         })
         .then(response => {

@@ -8,14 +8,7 @@
             "email": "ale@graphicslab.org"
         }
     ],
-    "repositories": [
-      {
-        "type": "vcs",
-        "url":  "git@github.com:aoloe/php-tiny-rest.git"
-      }
-    ],
     "require": {
-        "pusher/pusher-php-server": "^4.1",
-        "aoloe/tiny-rest": "dev-master"
+        "pusher/pusher-php-server": "^4.1"
     }
 }

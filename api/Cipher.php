@@ -26,16 +26,17 @@ class Cipher
         ");
     }
 
-    function get_list() {
+    function get_list($author = null) {
         $list = [];
         $db_result = $this->db->query('SELECT
-            sentence_hash, title, language
+            sentence_hash, title, language, author
             FROM sentence');
         while ($row = $db_result->fetchArray(SQLITE3_NUM)) {
             $list[] = [
                 'hash' => $row[0],
                 'title' => $row[1],
-                'language' => $row[2]
+                'language' => $row[2],
+                'editable' => $row[3] === $author
             ];
         }
         return $list;

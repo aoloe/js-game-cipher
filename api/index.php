@@ -30,9 +30,15 @@ $response = new Aoloe\TinyRest\HttpResponse();
 $app->get('list', function() use($config, $request, $response) {
     $list = [];
     $cipher = new Cipher($config['db']);
-    foreach ($cipher->get_list() as $item) {
-        $list[] = ['cipher_id' => $item['hash'], 'title' => $item['title'], 'language' => $item['language']];
+    foreach ($cipher->get_list($request->get('author')) as $item) {
+        $list[] = [
+            'cipher_id' => $item['hash'],
+            'title' => $item['title'],
+            'language' => $item['language'],
+            'editable' => $item['editable']
+        ];
     }
+
     $response->respond($list);
 });
 

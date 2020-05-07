@@ -4,7 +4,7 @@
 
 - `git clone https://github.com/aoloe/js-game-cipher.git cipher`
 - `cd api && composer install`
-- `mkdir api/db`
+- `wget https://raw.githubusercontent.com/aoloe/php-tiny-rest/master/src/TinyRest.php`
 - create the `api/config.php` file (based on `api/config-demo.php`)
 
 ## Todo
