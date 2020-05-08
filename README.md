@@ -9,6 +9,8 @@
 
 ## Todo
 
+- capture the back button
+- make the back link discoverable
 - initial sync with others
 - editing (deleting) existing sentences by their author.
 - import / export sentences.

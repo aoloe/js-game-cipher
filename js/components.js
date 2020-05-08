@@ -86,7 +86,7 @@ Vue.component('editor', {
       </option>
     </select><br>
     <textarea v-model="sentence"></textarea required><br>
-    <input type="text" v-model="description" placeholder="Description"><br>
+    <input type="text" v-model="description" placeholder="Description" class="description"><br>
     <input type="button" value="Add" :disabled="title === '' || language === null || sentence === ''" v-on:click="create" placeholder="Description">
   </div>`,
   props: {

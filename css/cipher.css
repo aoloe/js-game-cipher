@@ -35,3 +35,12 @@ span.share_key {
   border: 1px solid darkgray;
   background-color: lightgray;
 }
+div.creation textarea {
+  width:100%;
+  max-width:50em;
+  height:7em;
+}
+div.creation input.description {
+  width:100%;
+  max-width:40em;
+}
