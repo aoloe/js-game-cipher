@@ -2,11 +2,13 @@
 
 class Cipher
 {
+    static $db_version = 0;
     var $db = null;
 
     function __construct($db_name = 'db/cipher.db') {
         // TODO: move the db outside of httpdocs
         $this->db = new SQLite3($db_name);
+
         $this->db->query("CREATE TABLE IF NOT EXISTS sentence (
                 sentence_id INTEGER PRIMARY KEY,
                 sentence_hash TEXT,
@@ -30,7 +32,8 @@ class Cipher
         $list = [];
         $db_result = $this->db->query('SELECT
             sentence_hash, title, language, author
-            FROM sentence');
+            FROM sentence
+            ORDER BY sentence DESC');
         while ($row = $db_result->fetchArray(SQLITE3_NUM)) {
             $list[] = [
                 'hash' => $row[0],

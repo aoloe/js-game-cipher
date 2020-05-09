@@ -9,6 +9,8 @@
 
 ## Todo
 
+- fine di linea  senza dividere le parole
+- invert the list and put the join at the top
 - capture the back button
 - make the back link discoverable
 - initial sync with others
