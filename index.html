@@ -31,7 +31,7 @@
         <cipher-list :list="list" v-on:select="select">
         </cipher-list>
         <h2>Create a cipher</h2>
-        <p>Create your own cipher: <a href="#" v-on:click="edit('')">Create</a></p>
+        <p>Create your own cipher <input type="button" value="Create" v-on:click="edit('')"></p>
         <h2>Join a shared cipher</h2>
         <p>Use the invitation code you got: <input type="text" v-model="share_key" v-on:keyup.enter="join_shared"> <input type="button" value="Join" v-on:click="join_shared"></p>
       </template>
