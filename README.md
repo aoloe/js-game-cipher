@@ -9,10 +9,11 @@
 
 ## Todo
 
+- two columns?
+- filter by language and by own
+- in edit mode, state that underline shows the words
 - fine di linea  senza dividere le parole
-- invert the list and put the join at the top
 - capture the back button
-- make the back link discoverable
 - initial sync with others
 - editing (deleting) existing sentences by their author.
 - import / export sentences.

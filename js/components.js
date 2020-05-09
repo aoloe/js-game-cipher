@@ -1,16 +1,35 @@
 Vue.component('cipher-list', {
   template: `<div>
-    <h1>Ciphered citations</h1>
     <ul>
-      <li v-for="item in list">
+      <li v-for="item in paginated_list">
         <a href="#" v-on:click="select(item.cipher_id)">{{item.title}}</a>
         ({{item.language}})
         <a href="#" v-if="item.editable === true" v-on:click="edit(item.cipher_id)">✎</a>
       </li>
     </ul>
+    <button type="button" class="page-link" v-if="page > 0" @click="page--"> Previous </button>
+    <button type="button" class="page-link" v-if="page <= page_n" @click="page++"> Next </button>
   </div>`,
   props: {
     list: Array
+  },
+  data: function() {
+    return {
+      page: 0,
+      page_n: 0,
+      per_page: 10
+    }
+  },
+  computed: {
+    paginated_list() {
+      if (this.list === null) {
+        return [];
+      }
+      start = this.page * this.per_page;
+      list = this.list.slice(start, start + this.per_page);
+      page_n = Math.trunc(list.length / this.per_page);
+      return list;
+    }
   },
   methods: {
     edit: function() {
