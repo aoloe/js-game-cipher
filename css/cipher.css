@@ -3,6 +3,10 @@ ul.cipher-list {
   padding-left: 0;
 }
 
+ul.cipher-list li {
+  line-height: 2em;
+}
+
 ul.cipher-list a {
   color: black;
   text-decoration: none;
