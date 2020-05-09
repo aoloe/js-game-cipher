@@ -17,3 +17,4 @@
 - initial sync with others
 - editing (deleting) existing sentences by their author.
 - import / export sentences.
+- use the button style from <https://codepen.io/bilalo05/pen/oNgrKXo> ?

@@ -1,6 +1,6 @@
 Vue.component('cipher-list', {
   template: `<div>
-    <ul>
+    <ul class="cipher-list">
       <li v-for="item in paginated_list">
         <a href="#" v-on:click="select(item.cipher_id)">{{item.title}}</a>
         ({{item.language}})

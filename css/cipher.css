@@ -1,3 +1,17 @@
+ul.cipher-list {
+  list-style-type: none;
+  padding-left: 0;
+}
+
+ul.cipher-list a {
+  color: black;
+  text-decoration: none;
+}
+
+ul.cipher-list a:hover {
+  text-decoration: underline;
+}
+
 .sentence {
 }
 .character {
