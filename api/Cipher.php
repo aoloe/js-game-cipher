@@ -33,7 +33,7 @@ class Cipher
         $db_result = $this->db->query('SELECT
             sentence_hash, title, language, author
             FROM sentence
-            ORDER BY sentence DESC');
+            ORDER BY sentence_id DESC');
         while ($row = $db_result->fetchArray(SQLITE3_NUM)) {
             $list[] = [
                 'hash' => $row[0],
