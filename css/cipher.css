@@ -4,7 +4,7 @@ ul.cipher-list {
 }
 
 ul.cipher-list li {
-  line-height: 2em;
+  margin-top:1em;
 }
 
 ul.cipher-list a {
@@ -12,8 +12,9 @@ ul.cipher-list a {
   text-decoration: none;
 }
 
-ul.cipher-list a:hover {
+ul.cipher-list li:hover {
   text-decoration: underline;
+  cursor: pointer;
 }
 
 .sentence {

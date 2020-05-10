@@ -1,14 +1,14 @@
 Vue.component('cipher-list', {
   template: `<div>
     <ul class="cipher-list">
-      <li v-for="item in paginated_list">
-        <a href="#" v-on:click="select(item.cipher_id)">{{item.title}}</a>
+      <li v-for="item in paginated_list" v-on:click="select(item.cipher_id)">
+        {{item.title}}
         ({{item.language}})
         <a href="#" v-if="item.editable === true" v-on:click="edit(item.cipher_id)">✎</a>
       </li>
     </ul>
-    <button type="button" class="page-link" v-if="page > 0" @click="page--"> Previous </button>
-    <button type="button" class="page-link" v-if="page <= page_n" @click="page++"> Next </button>
+    <button type="button" class="page-link" v-if="page > 0" v-on:click="page--"> Previous </button>
+    <button type="button" class="page-link" v-if="page <= page_n" v-on:click="page++"> Next </button>
   </div>`,
   props: {
     list: Array

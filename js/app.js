@@ -77,7 +77,7 @@ const app = new Vue({
     update: function(sentence) {
       this.sentence = new Sentence(sentence);
     },
-    select: function(id) {
+    select: function(id = null) {
       this.description_visible = false;
       if (id === null) {
         this.cipher_id = null;
