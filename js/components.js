@@ -1,5 +1,14 @@
 Vue.component('cipher-list', {
   template: `<div>
+		<p>
+    <select v-model="filter" required>
+      <option value="all">All</option>
+      <option value="mine">Mine</option>
+      <option v-for="(value, key) in languages" v-bind:value="key">
+        {{value}}
+      </option>
+    </select><br>
+		</p>
     <ul class="cipher-list">
       <li v-for="item in paginated_list" v-on:click="select(item.cipher_id)">
         {{item.title}}
@@ -11,13 +20,29 @@ Vue.component('cipher-list', {
     <button type="button" class="page-link" v-if="page <= page_n" v-on:click="page++"> Next </button>
   </div>`,
   props: {
-    list: Array
+    list: Array,
+		languages: Object
   },
   data: function() {
     return {
       page: 0,
       page_n: 0,
-      per_page: 10
+      per_page: 10,
+      filter: 'all'
+    }
+  },
+  mounted() {
+    if (localStorage.cipher_filter) {
+      this.filter = localStorage.cipher_filter;
+    }
+  },
+  watch: {
+    filter: function(new_value) {
+      if (this.filter === 'all') {
+        localStorage.removeItem('cipher_filter');
+      } else {
+        localStorage.setItem('cipher_filter', this.filter);
+      }
     }
   },
   computed: {
@@ -25,9 +50,16 @@ Vue.component('cipher-list', {
       if (this.list === null) {
         return [];
       }
+      if (this.filter === 'all') {
+        list = this.list.slice();
+      } else if (this.filter === 'mine') {
+        list = this.list.filter(f => f.editable === true);
+      } else {
+        list = this.list.filter(f => f.language === this.filter);
+      }
       start = this.page * this.per_page;
-      list = this.list.slice(start, start + this.per_page);
-      page_n = Math.trunc(list.length / this.per_page);
+      this.page_n = Math.trunc(list.length / this.per_page);
+      list = list.slice(start, start + this.per_page);
       return list;
     }
   },

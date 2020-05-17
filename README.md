@@ -26,3 +26,5 @@
 - editing (deleting) existing sentences by their author.
 - import / export sentences.
 - use the button style from <https://codepen.io/bilalo05/pen/oNgrKXo> ?
+- trim spaces and replace multiple spaces by single ones.
+- show line breaks as such (and remove from the end)

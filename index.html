@@ -28,7 +28,7 @@
         </p>
       </div>
       <template v-else>
-        <cipher-list :list="list" v-on:select="select">
+        <cipher-list :list="list" :languages="languages" v-on:select="select">
         </cipher-list>
         <h2>Create a cipher</h2>
         <p>Create your own cipher <input type="button" value="Create" v-on:click="edit('')"></p>
