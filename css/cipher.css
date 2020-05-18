@@ -1,3 +1,4 @@
+/** = list = */
 ul.cipher-list {
   list-style-type: none;
   padding-left: 0;
@@ -12,10 +13,11 @@ ul.cipher-list a {
   text-decoration: none;
 }
 
-ul.cipher-list li:hover {
+ul.cipher-list li a.label:hover {
   text-decoration: underline;
-  cursor: pointer;
 }
+
+/* player */
 
 .sentence {
 }
@@ -54,6 +56,30 @@ span.share_key {
   border: 1px solid darkgray;
   background-color: lightgray;
 }
+
+/* https://stackoverflow.com/a/23358665/5239250 */
+.share {
+  font-weight: bold;
+  position: relative;
+  margin-right:.7em;
+}
+.share:before {
+  content: ".";
+  font-size: 2.2em;
+  position: absolute;
+  bottom: -2.5px;
+  left: -4px;
+}
+.share:after {
+  content: ":";
+  font-size: 2em;
+  position: absolute;
+  bottom: -6px;
+  right: -7px;
+}
+
+/** editor */
+
 div.creation textarea {
   width:100%;
   max-width:50em;

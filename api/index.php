@@ -30,22 +30,53 @@ $response = new Aoloe\TinyRest\HttpResponse();
 $app->get('list', function() use($config, $request, $response) {
     $list = [];
     $cipher = new Cipher($config['db']);
-    foreach ($cipher->get_list($request->get('author')) as $item) {
+    $author = $request->get('author');
+    foreach ($cipher->get_list($author) as $item) {
         $list[] = [
             'cipher_id' => $item['hash'],
             'title' => $item['title'],
             'language' => $item['language'],
+            'category' => $item['category'],
+            'work_in_progress' => $item['work_in_progress'],
             'editable' => $item['editable']
         ];
     }
 
-    $response->respond($list);
+    $response->respond([
+        'admin' => in_array($author, $config['admin']),
+        'list' => $list
+    ]);
 });
 
 $app->get('get', function() use($config, $request, $response) {
     $cipher = new Cipher($config['db']);
-    [$hash, $title, $sentence, $description] = $cipher->get($request->get('id'));
-    $response->respond(['cipher_id' => $hash, 'title' => $title, 'sentence' => $sentence, 'description' => $description]);
+    $sort = true;
+    $author = null;
+    $raw = false;
+    if ($request->has('raw') && $request->has('author')) {
+        $raw = $request->get('raw') === 'true' ? true : false;
+        $author = $request->get('author');
+    }
+    [$hash, $title, $sentence, $language, $category, $work_in_progress, $description, $cipher_author] = $cipher->get($request->get('id'));
+    if ($raw) {
+        $response->respond([
+            'cipher_id' => $hash,
+            'title' => $title,
+            'sentence' => ($author === $cipher_author ? $sentence : null),
+            'language' => $language,
+            'category' => $category,
+            'work_in_progress' => $work_in_progress,
+            'description' => $description
+        ]);
+    } else {
+        $response->respond([
+            'cipher_id' => $hash,
+            'title' => $title,
+            // TODO: do not send the setence but only the numbers
+            'sentence' => $sentence,
+            'description' => $description
+        ]);
+    }
 });
 
 $app->post('create', function() use($config, $request, $response) {
@@ -54,10 +85,48 @@ $app->post('create', function() use($config, $request, $response) {
         $request->get('title'),
         $request->get('language'),
         $request->get('sentence'),
+        $request->get('category'),
+        $request->get('work_in_progress'),
         $request->get('description'),
         $request->get('author')
     );
     $response->respond(['id' => $hash]);
+});
+
+$app->post('update', function() use($config, $request, $response) {
+    $cipher = new Cipher($config['db']);
+    [$id, $hash] = $cipher->set(
+        $request->get('id'),
+        $request->get('title'),
+        $request->get('language'),
+        $request->get('sentence'),
+        $request->get('category'),
+        $request->get('work_in_progress'),
+        $request->get('description'),
+        $request->get('author')
+    );
+    $response->respond(['id' => $hash]);
+});
+
+$app->post('delete', function() use($config, $request, $response) {
+    $cipher = new Cipher($config['db']);
+    [$hash] = $cipher->delete(
+        $request->get('id'),
+        $request->get('author')
+    );
+    $response->respond(['hash' => $hash]);
+});
+
+$app->get('user_by_cipher', function() use($config, $request, $response) {
+    $cipher = new Cipher($config['db']);
+    $user_hash = null;
+    if (in_array($request->get('admin'), $config['admin'])) {
+        $row = $cipher->get(
+            $request->get('id')
+        );
+        $user_hash = $row[7];
+    }
+    $response->respond(['user_id' => $user_hash]);
 });
 
 $app->post('share', function() use($config, $request, $response) {

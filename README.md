@@ -12,6 +12,7 @@
 - two columns?
 - filter by language and by own
 - in edit mode, state that underline shows the words
+- in play mode do not get the plain sentence
 - does the share still work?
 - fine di linea  senza dividere le parole
 - capture the back button
