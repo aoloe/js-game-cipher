@@ -43,6 +43,11 @@ ul.cipher-list li a.label:hover {
   height: 1em;
   min-height: 1em;
 }
+/* this looks better but i could not get it to work */
+/* https://stackoverflow.com/a/4609491/5239250 */
+.character.new-line {
+    display:block;
+}
 .character .cipher {
   font-size:60%;
   text-align:center;

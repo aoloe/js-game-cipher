@@ -441,7 +441,7 @@ Vue.component('character', {
 
 Vue.component('ciphered-sentence', {
   template: `<div>
-    <div v-for="(character, i) in sentence.characters" class="character">
+    <div v-for="(character, i) in sentence.characters" class="character" v-bind:class="{'new-line': character.c === String.fromCharCode(10)}">
       <template v-if="character.i !== 0">
       <character ref="characters" :character="character" :pos="i" :transformations="sentence.transformations" v-on:next_focus="next_focus" v-on:prev_focus="prev_focus" v-on:add_character="add_character"></character>
       <div class="cipher">{{character.i}}</div>
