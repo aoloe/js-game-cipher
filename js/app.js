@@ -48,6 +48,8 @@ const app = new Vue({
     data_store: Data_store
   },
   mounted() {
+    // for a-links in the main index.html
+    this.$on('a_link_event', this.go);
     // TODO: migration from old player_id... remove this after some time (ale/20200517)
     if (localStorage.player_id) {
       localStorage.setItem('cipher_player_id', localStorage.player_id);

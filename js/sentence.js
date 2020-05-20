@@ -4,7 +4,7 @@ Character = function(c, i) {
   this.hint = i === 0;
   this.transform = null;
 }
-Character.in_clear = new Set([' ', ',', '!', '?', '.', '(', ')', ';', ':', '%', '/', '*', '"', '«', '»', '“', '”', '-', '\'', "\n"]);
+Character.in_clear = new Set([' ', ',', '!', '?', '.', '(', ')', ';', ':', '%', '/', '*', '"', '«', '»', '„', '“', '”', '-', '\'', "\n"]);
 // map of diacritics: â → [^, a]
 Character.diacritics = new Map([
   ['à', ['`', 'a']], ['á', ['\'', 'a']],['â', ['^', 'a']], ['ä', ['"', 'a']],

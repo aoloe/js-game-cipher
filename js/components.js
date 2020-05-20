@@ -126,10 +126,10 @@ Vue.component('player', {
     </p>
     <p v-else>
     Send this code to other players to play this game with them:<br>
-    <!--
     <a v-bind:href="link_multiplayer" class="share_key">{{data_store.share_key}}</a>
-    -->
+    <!--
     <span class="share_key">{{data_store.share_key}}</span>
+    -->
 
     </p>
     <p><span class="share">&lt;</span><a v-bind:href="link_here">Share this game</a></p>
@@ -440,14 +440,14 @@ Vue.component('character', {
 Vue.component('ciphered-sentence', {
   template: `<div>
     <div v-for="word in words" class="word">
-      <div v-for="(character, i) in word" class="character" v-bind:class="{'new-line': character.c === String.fromCharCode(10)}">
-        <template v-if="character.i !== 0">
-        <character ref="characters" :character="character" :pos="i" :transformations="sentence.transformations" v-on:next_focus="next_focus" v-on:prev_focus="prev_focus" v-on:add_character="add_character"></character>
-        <div class="cipher">{{character.i}}</div>
+      <div v-for="(item, i) in word" class="character" v-bind:class="{'new-line': item.character.c === String.fromCharCode(10)}">
+        <template v-if="item.character.i !== 0">
+        <character ref="characters" :character="item.character" :pos="item.i" :transformations="sentence.transformations" v-on:next_focus="next_focus" v-on:prev_focus="prev_focus" v-on:add_character="add_character"></character>
+        <div class="cipher">{{item.character.i}}</div>
         </template>
         <template v-else>
-        <div v-if="character.c === ' '" class="space"> </div>
-        <div v-else class="hint">{{character.c}}</div>
+        <div v-if="item.character.c === ' '" class="space"> </div>
+        <div v-else class="hint">{{item.character.c}}</div>
         </template>
       </div>
     </div>
@@ -464,17 +464,18 @@ Vue.component('ciphered-sentence', {
       // console.log(this.sentence.characters);
       let words = [];
       let word = [];
+      let i = 0;
       for (let character of this.sentence.characters) {
-        word.push(character);
+        word.push({'character': character, 'i': i});
         if (character.c === ' ') {
           words.push(word);
           word = [];
         }
+        i++;
       }
       if (word.length > 0) {
         words.push(word);
       }
-      console.log(words);
       return words;
     }
   },
@@ -562,8 +563,7 @@ Vue.component('a-link', {
       required: true
     },
     params: {
-      type: Object,
-      default: {}
+      validator: p => typeof p === 'object' || p === null
     }
   },
   computed: {
