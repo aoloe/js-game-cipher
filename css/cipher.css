@@ -21,6 +21,10 @@ ul.cipher-list li a.label:hover {
 
 .sentence {
 }
+.word {
+  display: inline-block;
+  white-space: nowrap;
+}
 .character {
   display: inline-block;
   vertical-align: top;
@@ -56,7 +60,8 @@ ul.cipher-list li a.label:hover {
 div.creation {
   margin-bottom: 2em;
 }
-span.share_key {
+span.share_key,
+a.share_key {
   padding: 2px;
   border: 1px solid darkgray;
   background-color: lightgray;

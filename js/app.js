@@ -62,7 +62,7 @@ const app = new Vue({
     if (localStorage.cipher_share_key) {
       this.data_store.share = localStorage.cipher_share_key;
       localStorage.removeItem('cipher_share_key');
-      this.mode = 'view';
+      this.mode = 'play';
       return;
     }
     if (localStorage.cipher_id) {
@@ -77,12 +77,17 @@ const app = new Vue({
     if (params.has('id')) {
       const id = params.get('id');
       localStorage.removeItem('cipher_id');
-      this.data_store.cipher_id = id;
-      this.go('player');
+      localStorage.removeItem('mode');
+      // this.mode = 'list';
+      // this.data_store.cipher_id = id;
+      this.go('play', {'cipher_id': id});
     } else if (params.has('share')) {
       const id = params.get('share');
+      localStorage.removeItem('cipher_id');
+      localStorage.removeItem('mode');
       this.data_store.cipher_id = null;
-      this.data_store.share_key = id;
+      localStorage.cipher_share_key = id;
+      this.go('list');
       // localStorage.setItem('cipher_share_key', id);
 		}
     if (Array.from(params).length > 0) {
@@ -94,8 +99,6 @@ const app = new Vue({
   methods: {
     go: function(href, params = {}) {
       if (modes.includes(href)) {
-        this.mode = href;
-        localStorage.setItem('cipher_mode', this.mode);
         for (let [key, param] of Object.entries(params)) {
           if (typeof(this[key]) !== 'undefined') {
             this[key] = param;
@@ -103,6 +106,8 @@ const app = new Vue({
             console.error('go: ' + key + ' is not defined');
           }
         }
+        this.mode = href;
+        localStorage.setItem('cipher_mode', this.mode);
       }
     },
   }

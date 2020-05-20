@@ -132,9 +132,7 @@ Vue.component('player', {
     <span class="share_key">{{data_store.share_key}}</span>
 
     </p>
-    <!--
     <p><span class="share">&lt;</span><a v-bind:href="link_here">Share this game</a></p>
-    -->
   </div>`,
   props: {
     cipher_id: {
@@ -441,15 +439,17 @@ Vue.component('character', {
 
 Vue.component('ciphered-sentence', {
   template: `<div>
-    <div v-for="(character, i) in sentence.characters" class="character" v-bind:class="{'new-line': character.c === String.fromCharCode(10)}">
-      <template v-if="character.i !== 0">
-      <character ref="characters" :character="character" :pos="i" :transformations="sentence.transformations" v-on:next_focus="next_focus" v-on:prev_focus="prev_focus" v-on:add_character="add_character"></character>
-      <div class="cipher">{{character.i}}</div>
-      </template>
-      <template v-else>
-      <div v-if="character.c === ' '" class="space"> </div>
-      <div v-else class="hint">{{character.c}}</div>
-      </template>
+    <div v-for="word in words" class="word">
+      <div v-for="(character, i) in word" class="character" v-bind:class="{'new-line': character.c === String.fromCharCode(10)}">
+        <template v-if="character.i !== 0">
+        <character ref="characters" :character="character" :pos="i" :transformations="sentence.transformations" v-on:next_focus="next_focus" v-on:prev_focus="prev_focus" v-on:add_character="add_character"></character>
+        <div class="cipher">{{character.i}}</div>
+        </template>
+        <template v-else>
+        <div v-if="character.c === ' '" class="space"> </div>
+        <div v-else class="hint">{{character.c}}</div>
+        </template>
+      </div>
     </div>
   </div>`,
   props: {
@@ -457,6 +457,25 @@ Vue.component('ciphered-sentence', {
   },
   data: function() {
     return {
+    }
+  },
+  computed: {
+    words() {
+      // console.log(this.sentence.characters);
+      let words = [];
+      let word = [];
+      for (let character of this.sentence.characters) {
+        word.push(character);
+        if (character.c === ' ') {
+          words.push(word);
+          word = [];
+        }
+      }
+      if (word.length > 0) {
+        words.push(word);
+      }
+      console.log(words);
+      return words;
     }
   },
   methods: {
