@@ -10,6 +10,8 @@ header a.logo {
 }
 header a.logo.round {
   border-radius:50px;
+  border: limegreen solid 1px;
+  background-color: palegreen;
 }
 
 header a.logo img {

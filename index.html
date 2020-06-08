@@ -9,6 +9,16 @@
   </head>
   <body>
     <div class="" id="app">
+      <header>
+        <a href="../" class="logo round" title="Back to the games list">
+        <img src="../images/games-200.png" class="icon">
+        </a>
+        <!--
+        <a-link href="list" class="logo square">
+        <img src="../images/cipher-2.png" class="icon">
+        </a-link>
+        -->
+      </header>
       <h1>Ciphers</h1>
       <p v-if="mode !== 'list'"><button v-on:click="go('list', {'cipher_id': null})">Back to the list</button></p>
       <player v-if="mode === 'play'" :cipher_id="cipher_id">
